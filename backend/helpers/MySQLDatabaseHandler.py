@@ -5,6 +5,7 @@ import subprocess
 class MySQLDatabaseHandler(object):
     
     def __init__(self,MYSQL_USER,MYSQL_USER_PASSWORD,MYSQL_PORT,MYSQL_DATABASE,MYSQL_HOST = "localhost"):
+        self.IS_DOCKER = True if 'DB_NAME' in os.environ else False
         self.MYSQL_HOST = os.environ['DB_NAME'] if 'DB_NAME' in os.environ else MYSQL_HOST
         self.MYSQL_USER = MYSQL_USER
         self.MYSQL_USER_PASSWORD = MYSQL_USER_PASSWORD
@@ -39,6 +40,8 @@ class MySQLDatabaseHandler(object):
         return data
 
     def load_file_into_db(self,file_name = os.path.join("..","init.sql")):
+        if self.IS_DOCKER:
+            return
         sql_file = open(file_name,"r")
         sql_file_data = list(filter(lambda x:x != '',sql_file.read().split(";\n")))
         self.query_executor(sql_file_data)
