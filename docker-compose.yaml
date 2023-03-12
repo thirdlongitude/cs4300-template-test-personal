@@ -25,6 +25,7 @@ services:
         container_name: ${TEAM_NAME}_db
         image: mariadb:10.5.8
         restart: always
+        command: mysqld --skip-name-resolve --connect_timeout=600 --net_read_timeout=600 --net_write_timeout=600 --max_allowed_packet=256M
         environment:
                 - MYSQL_USER=admin
                 - MYSQL_PASSWORD=admin
