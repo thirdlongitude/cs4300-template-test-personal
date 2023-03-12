@@ -1,6 +1,5 @@
 import os
 import sqlalchemy as db
-import subprocess
 
 class MySQLDatabaseHandler(object):
     
@@ -35,7 +34,6 @@ class MySQLDatabaseHandler(object):
 
     def query_selector(self,query):
         conn = self.lease_connection()
-        print("QUERY FOR SQL",type(query))
         data = conn.execute(query)
         return data
 
