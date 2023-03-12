@@ -3,6 +3,9 @@ import os
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
+
+# ROOT_PATH for linking with all your files. 
+# Feel free to use a config.py or settings.py with a global export variable
 os.environ['ROOT_PATH'] = os.path.abspath(os.path.join("..",os.curdir))
 
 # These are the DB credentials for your OWN MySQL
