@@ -25,6 +25,9 @@ services:
         container_name: ${TEAM_NAME}_db
         image: mariadb:10.5.8
         restart: always
+        command: [
+            '--wait_timeout=28800',
+        ]
         environment:
                 - MYSQL_USER=admin
                 - MYSQL_PASSWORD=admin
