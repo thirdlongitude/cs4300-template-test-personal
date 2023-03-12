@@ -10,7 +10,7 @@ from sqlalchemy import text
 import json
 from helpers.MySQLDatabaseHandler import MySQLDatabaseHandler
 
-MYSQL_USER = "root"
+MYSQL_USER = "admin"
 MYSQL_USER_PASSWORD = "admin"
 MYSQL_PORT = 3306
 MYSQL_DATABASE = "kardashiandb"
