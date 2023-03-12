@@ -18,7 +18,6 @@ class MySQLDatabaseHandler(object):
         conn = engine.connect()
         conn.execute(f"CREATE DATABASE IF NOT EXISTS {self.MYSQL_DATABASE}")
         conn.execute(f"USE {self.MYSQL_DATABASE}")
-        conn.close()
         return engine
 
     def lease_connection(self):
@@ -31,13 +30,12 @@ class MySQLDatabaseHandler(object):
                 conn.execute(i)
         else:
             conn.execute(query)
-        conn.close()
+        
 
     def query_selector(self,query):
         conn = self.lease_connection()
         print("QUERY FOR SQL",type(query))
         data = conn.execute(query)
-        conn.close()
         return data
 
     def load_file_into_db(self,file_name = os.path.join("..","init.sql")):
