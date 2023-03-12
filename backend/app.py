@@ -1,4 +1,3 @@
-# save this as app.py
 from flask import Flask,render_template
 from flask_cors import CORS
 import sqlalchemy as db
