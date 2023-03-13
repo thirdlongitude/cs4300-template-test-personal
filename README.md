@@ -30,10 +30,26 @@ You will not be able to run this directly, unless you have **Docker**.
 
 ### Running locally (Flask/Gunicorn only)
 
-You can run the code more easily offline by just creating a Python3.7 virtual enviornment. (You can Google these steps quite easily)
-- From there, activate the environment
-- Install the files from requirements.txt
-- From here everything should run smoothly.
+### Running locally
+
+#### Step 1: Set up MySQL
+You will need to install MySQL. Here are two tutorials that could help you with the process”
+For Windows users: https://blog.devart.com/how-to-install-mysql-on-windows-using-mysql-installer.html
+For Mac users:
+https://www.geeksforgeeks.org/how-to-install-mysql-on-macos/
+
+You may choose to install MySQL in an alternative method such as brew, but you will need to figure it out on your own. Regardless, make sure you write down the root password you set during the installation process. You will need it later.
+
+We advise against using another database system such as PostgreSQL. Note that our project server uses MySQL. The different flavors of SQL may cause your app to fail on our server while working perfectly fine on yours.
+
+#### Step 2: Set up a virtual environment
+Create a virtual environment in Python. You may continue using the one you setup for assignment if necessary. To review how to set up a virtual environment and activate it, refer to A0 assignment writeup.
+
+#### Step 3: Install dependencies
+You need to install dependencies by running `python -m pip install -r requirements.txt` in the backend folder.
+
+#### Step 4: Connection to MySQL
+Make sure your MySQL server is running, then in app.py, change the SQL credentials to match your local MySQL credentials. You should now be able to start the server by running.
 
 Once done with all this, you can run it using:
 
