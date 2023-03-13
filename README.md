@@ -62,6 +62,9 @@ You can clone a copy of this repository directly and use it, or you can use the 
 - Click **build**, and wait for a minute. If all goes successfully, hitting the refresh button on the Container Information table and the logs tab will show the created data from the service. If this doesn't work, logout and log back in.
 - Your URL should now work and display a simple episode-searching app
 - If it doesn't load initially, give it a few seconds and reload.
+- This should be the screen you see. Test it out
+
+![image](https://user-images.githubusercontent.com/55399795/224594465-e317dd02-7519-4fd7-aaca-32457650ce36.png)
 
 ## Running locally
 
