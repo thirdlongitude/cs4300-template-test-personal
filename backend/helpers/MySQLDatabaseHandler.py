@@ -1,16 +1,13 @@
 import os
 import sqlalchemy as db
-from dotenv import load_dotenv
-from pathlib import Path
-load_dotenv(dotenv_path=os.path.join("..",".."))
 
 class MySQLDatabaseHandler(object):
     
     def __init__(self,MYSQL_USER,MYSQL_USER_PASSWORD,MYSQL_PORT,MYSQL_DATABASE,MYSQL_HOST = "localhost"):
         self.IS_DOCKER = True if 'DB_NAME' in os.environ else False
         self.MYSQL_HOST = os.environ['DB_NAME'] if self.IS_DOCKER else MYSQL_HOST
-        self.MYSQL_USER = os.getenv('MYSQL_USER') if self.IS_DOCKER else MYSQL_USER
-        self.MYSQL_USER_PASSWORD = os.getenv('MYSQL_PASSWORD') if self.IS_DOCKER else MYSQL_USER_PASSWORD
+        self.MYSQL_USER = "admin" if self.IS_DOCKER else MYSQL_USER
+        self.MYSQL_USER_PASSWORD = "admin" if self.IS_DOCKER else MYSQL_USER_PASSWORD
         self.MYSQL_PORT = 3306 if self.IS_DOCKER else MYSQL_PORT
         self.MYSQL_DATABASE = MYSQL_DATABASE
         self.engine = self.validate_connection()

@@ -25,14 +25,11 @@ services:
         container_name: ${TEAM_NAME}_db
         image: mariadb:10.5.8
         restart: always
-        command: [
-            '--wait_timeout=28800',
-        ]
         environment:
-                - MYSQL_USER=${MYSQL_USER}
-                - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-                - MYSQL_DATABASE=${MYSQL_DATABASE}
-                - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+                - MYSQL_USER=admin
+                - MYSQL_PASSWORD=admin
+                - MYSQL_DATABASE=kardashiandb
+                - MYSQL_ROOT_PASSWORD=admin
         volumes:
                 - flask_volume:/var/lib/mysql
                 - ./init.sql:/docker-entrypoint-initdb.d/init.sql
