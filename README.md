@@ -54,18 +54,18 @@ Ideally, once you form teams, at least one person on the team can run Docker on 
 - A helper class called **MySQLDatabaseHandler.py** has been provided.
   - This class abstracts the process of creating and managing the database, the engine and the connections.
   - It also abstracts the process of querying the database.
-    - The query_executor method will handle any non-select queries, like INSERT, UPDATE, DELETE etc. This is useful for modifying the DB as required
-    - The query_selector method will return any SELECT queries made on the DB.
-    - Preferably, you will not use any of the above two methods and will instead just implement your own in a more efficient way, but these functions have been provided just as an example, or as support for those who may not be comfortable with SQLAlchemy. If you are comfortable with SQLAlchemy, feel free to write the methods using the ORM framework and supported methods.
-    - **NOTE: Do not modify the other methods besides the two mentioned. You can add new ones, and override the above two methods, but do not delete or modify the connection class**
+  - The query_executor method will handle any non-select queries, like INSERT, UPDATE, DELETE etc. This is useful for modifying the DB as required
+  - The query_selector method will return any SELECT queries made on the DB.
+  - Preferably, you will not use any of the above two methods and will instead just implement your own in a more efficient way, but these functions have been provided just as an example, or as support for those who may not be comfortable with SQLAlchemy. If you are comfortable with SQLAlchemy, feel free to write the methods using the ORM framework and supported methods.
+  - **NOTE: Do not modify the other methods besides the two mentioned. You can add new ones, and override the above two methods, but do not delete or modify the connection class**
 - A few things to keep in mind:
   - If your database does not exist, it should automatically be created by the script (if it doesn't, post it up on ED)
   - Your authentication details for the DB are fixed along with the inital DB. 
-    - Do not change these params unless you're aware of how the docker-compose file works.
+   - Do not change these params unless you're aware of how the docker-compose file works.
 - The **init.sql** file is special, in that as the name suggests, it's your de-facto DB. It will always be built before your service is ready to run, and is helpful in storing pre-existing data, like test users, some configs and anything else that you may want at run-time.
   - It has the ability to detect its enviornment, and will adapt based on whether you have deployed it on the server or not
-    - When running locally, it will be loaded to your local database without any import commands required, and will be re-built each time
-    - When deployed on the server however, it will only be run once at the start of deployment. Any changes made to the DB from here on will be permanent, unless destroyed.
+  - When running locally, it will be loaded to your local database without any import commands required, and will be re-built each time
+  - When deployed on the server however, it will only be run once at the start of deployment. Any changes made to the DB from here on will be permanent, unless destroyed.
 
 
 ## Tutorial
