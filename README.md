@@ -5,8 +5,9 @@
 - [Summary](#summary)
 - [Authentication and Login](#authentication-and-login)
 - [Working with the template](#working-with-the-template)
+- [MySQL functionality](#mysql-functionality)
 - [Tutorial](#tutorial)
-- [Debugging Some Basic Errors](#debugging-some-basic-errors)
+- [Causes for errors and fixes](#causes-for-errors-and-fixes)
 - [General comments from the author](#general-comments-from-the-author)
 
 ## Summary
@@ -32,11 +33,7 @@ You will not be able to run this directly, unless you have **Docker**.
 You can run the code more easily offline by just creating a Python3.7 virtual enviornment. (You can Google these steps quite easily)
 - From there, activate the environment
 - Install the files from requirements.txt
-- Change the MySQL database URL to match your database credentials
-- Import the data into MySQL:
-  - Using init.sql DB file
-  - Manually create the data required
-  - Create the database through Flask
+- From here everything should run smoothly.
 
 Once done with all this, you can run it using:
 
@@ -49,6 +46,27 @@ flask run --host=0.0.0.0 --port=5000
 > Generally, I would recommend you do not install or use Docker unless you have prior experience or expertise with it. Docker for desktop while an excellent service, is _very_ CPU and RAM intensive, and will either be too slow to run or cause a lot of lag, or both. If you still want to go ahead, try to have AT LEAST 8GB Ram and an Intel i5/Ryzen 5 for Windows, including having WSL2 installed or an M1/M2 Macbook. 
 
 Ideally, once you form teams, at least one person on the team can run Docker on their laptop just for quick testing and development, however with the provided service this should not be required.
+
+## MySQL functionality
+
+- Firstly, only use MySQL. No Postgres, no MongoDB and no SQLite
+  - If you decide to use these, the server can still build them and deploy them with no problem, but you will be responsible for making it work
+- A helper class called **MySQLDatabaseHandler.py** has been provided.
+  - This class abstracts the process of creating and managing the database, the engine and the connections.
+  - It also abstracts the process of querying the database.
+    - The query_executor method will handle any non-select queries, like INSERT, UPDATE, DELETE etc. This is useful for modifying the DB as required
+    - The query_selector method will return any SELECT queries made on the DB.
+    - Preferably, you will not use any of the above two methods and will instead just implement your own in a more efficient way, but these functions have been provided just as an example, or as support for those who may not be comfortable with SQLAlchemy. If you are comfortable with SQLAlchemy, feel free to write the methods using the ORM framework and supported methods.
+    - **NOTE: Do not modify the other methods besides the two mentioned. You can add new ones, and override the above two methods, but do not delete or modify the connection class**
+- A few things to keep in mind:
+  - If your database does not exist, it should automatically be created by the script (if it doesn't, post it up on ED)
+  - Your authentication details for the DB are fixed along with the inital DB. 
+    - Do not change these params unless you're aware of how the docker-compose file works.
+- The **init.sql** file is special, in that as the name suggests, it's your de-facto DB. It will always be built before your service is ready to run, and is helpful in storing pre-existing data, like test users, some configs and anything else that you may want at run-time.
+  - It has the ability to detect its enviornment, and will adapt based on whether you have deployed it on the server or not
+    - When running locally, it will be loaded to your local database without any import commands required, and will be re-built each time
+    - When deployed on the server however, it will only be run once at the start of deployment. Any changes made to the DB from here on will be permanent, unless destroyed.
+
 
 ## Tutorial
 
